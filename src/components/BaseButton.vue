@@ -1,5 +1,8 @@
 <template>
-    <button :class="['btn', buttonStyle]">{{  text }}</button>
+    <button :class="['btn', buttonStyle]"
+            @click="toggleBookmarked">
+            {{  text }}
+    </button>
   </template>
 <script>
 export default {
@@ -9,6 +12,12 @@ export default {
       default: 'btn--primary',
     },
     text: String,
+  },
+  emits: ['toggleBookmarked'],
+  methods: {
+    toggleBookmarked() {
+      this.$emit('toggleBookmarked');
+    },
   },
 };
 </script>

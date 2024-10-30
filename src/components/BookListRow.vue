@@ -2,7 +2,11 @@
   <tr class="table-item__table-row">
     <td>{{ book.title }}</td>
     <td>{{ book.isbn }}</td>
-    <td><base-button text="Add Bookmark" buttonStyle="btn--secondary"/></td>
+    <td class="btn-column">
+        <base-button :text="book.isBookmarked ? 'Remove Bookmark' : 'Add Bookmark'"
+                     :buttonStyle="book.isBookmarked ? 'btn--secondary' : 'btn--primary'"
+                     @toggleBookmarked="handleToggleBookmarked"
+        /></td>
   </tr>
 </template>
 
@@ -16,7 +20,12 @@ export default {
   props: {
     book: Object,
   },
-
+  emits: ['toggleBookmarked'],
+  methods: {
+    handleToggleBookmarked() {
+      this.$emit('toggleBookmarked', this.book);
+    },
+  },
 };
 </script>
 
@@ -51,5 +60,12 @@ export default {
 .btn--secondary:hover {
   background-color: var(--primary);
   color: #fff;
+}
+
+.btn-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 8vh;
 }
 </style>

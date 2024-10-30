@@ -5,15 +5,17 @@
       <thead>
         <tr>
           <th class="table-item__table-head-name">Name</th>
-          <th class="table-item__table-head--isbn">ISBN</th>
-          <th class="th.table-item__table-head--actions">Action</th>
+          <th class="table-item__table-head-isbn">ISBN</th>
+          <th class="th.table-item__table-head-actions text-ctr">Action</th>
         </tr>
       </thead>
       <tbody>
         <book-list-row
                       v-for="book in books"
                       :key="book.isbn"
-                      :book="book"></book-list-row>
+                      :book="book"
+                      @toggleBookmarked="handleToggleBookmarked"
+                      />
       </tbody>
     </table>
   </section>
@@ -36,6 +38,7 @@ export default {
           publisher: 'Apress',
           price: '$28.75',
           numPages: 256,
+          isBookmarked: false,
         },
         {
           title: 'Using WebPagetest',
@@ -44,6 +47,7 @@ export default {
           publisher: 'O\'Reilly Media',
           price: '$25.80',
           numPages: 214,
+          isBookmarked: false,
         },
         {
           title: 'Web Scraping with Python',
@@ -52,6 +56,7 @@ export default {
           publisher: 'O\'Reilly Media',
           price: '$14.00',
           numPages: 256,
+          isBookmarked: false,
         },
         {
           title: 'High Performance Mobile Web',
@@ -60,9 +65,18 @@ export default {
           publisher: 'O\'Reilly Media',
           price: '$7.00',
           numPages: 326,
+          isBookmarked: false,
         },
       ],
     };
+  },
+  methods: {
+    handleToggleBookmarked(book) {
+      const bookToUpdate = this.books.find((b) => b.isbn === book.isbn);
+      if (bookToUpdate) {
+        bookToUpdate.isBookmarked = !bookToUpdate.isBookmarked;
+      }
+    },
   },
 };
 </script>
@@ -80,13 +94,13 @@ export default {
   width: 100%;
 }
 .table-item__table-head-name {
-  width: 65%;
+  width: 55%;
 }
 .table-item__table-head-isbn {
   width: 20%;
 }
 .table-item__table-head-actions {
-  width: 15%;
+  width: 25%;
 }
 .table-item__table-row button {
   opacity: 0;
@@ -109,6 +123,7 @@ export default {
 }
 .table-item__table tbody tr {
   border-bottom: 1px solid #dddddd;
+  height: 8vh;
 }
 .table-item__table tbody tr:nth-of-type(even) {
   background-color: #f3f3f3;
@@ -124,5 +139,9 @@ export default {
   margin-top: 1rem;
   padding-bottom: 0.4rem;
   border-bottom: 2px solid var(--primary-dark);
+}
+
+.text-ctr {
+  text-align: center;
 }
 </style>
