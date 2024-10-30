@@ -13,8 +13,7 @@
         <book-list-row
                       v-for="book in books"
                       :key="book.isbn"
-                      :title="book.title"
-                      :isbn="book.isbn"></book-list-row>
+                      :book="book"></book-list-row>
       </tbody>
     </table>
   </section>
@@ -24,7 +23,6 @@
 import BookListRow from './BookListRow.vue';
 
 export default {
-  name: 'BookList',
   components: {
     BookListRow,
   },

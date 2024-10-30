@@ -8,7 +8,6 @@ import AppHeader from '@/components/AppHeader.vue';
 import BookList from '@/components/BookList.vue';
 
 export default {
-  name: 'App',
   components: {
     AppHeader,
     BookList,
